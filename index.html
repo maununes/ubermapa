@@ -1,0 +1,102 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="manifest" href="site.webmanifest">
+        <link rel="apple-touch-icon" href="icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-3.5.0.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&key=AIzaSyAz6mhEskVbN9mu8Acp2tv1Pzg7R59Of8U"></script>
+    </head>
+    <body>
+        <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+		<div id="google_canvas" style="width:100%; height:400px"></div>
+		
+		<div>
+			</p>
+				Escolha o raio: 
+				<input onchange="changeSlider(this.value)" id="slider" type="range" min="1" max="100" step="10" value="10"/> 
+				<span id="rangeValue">10</span> Km
+			</p>
+		</div>
+		<script>
+			var rangeElem = document.querySelector('#slider');
+			var defaultValue = (rangeElem.max < rangeElem.min) ? rangeElem.min
+									: rangeElem.min + (rangeElem.max - rangeElem.min)/2;
+			   
+			function changeSlider(value){
+				$('#rangeValue').html(value);
+			}
+			changeSlider(defaultValue);
+		
+			var loc1 = [-5.8142979,-35.2059481];//slagado filho
+			var loc2 = [-5.8616348,-35.192669];//roberto rfeire
+			var loc3 = [-5.8143186,-35.2161118];//nascimento
+		
+		
+			(function() {
+				if(!!navigator.geolocation) {
+					var map;
+					var mapOptions = {
+						zoom: 15,
+						mapTypeId: google.maps.MapTypeId.ROADMAP
+					};
+					map = new google.maps.Map(document.getElementById('google_canvas'), mapOptions);
+					navigator.geolocation.getCurrentPosition(function(position) {
+						var geolocate = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+						var infowindow = new google.maps.InfoWindow({
+							map: map,
+							position: geolocate,
+							content:
+								'<b>Estou aqui!</h1>'
+						});
+						
+						geolocate = new google.maps.LatLng(loc1[0], loc1[1]);
+						infowindow = new google.maps.InfoWindow({
+							map: map,
+							position: geolocate,
+							content:
+								'<b>UNP - Salgado Filho</b><br>'+
+								'<button>Solicitar Uber</button>'
+						});
+						
+						geolocate = new google.maps.LatLng(loc2[0], loc2[1]);
+						infowindow = new google.maps.InfoWindow({
+							map: map,
+							position: geolocate,
+							content:
+								'<b>UNP - Roberto Freire</b><br>'+
+								'<button>Solicitar Uber</button>'
+						});
+						
+						geolocate = new google.maps.LatLng(loc3[0], loc3[1]);
+						infowindow = new google.maps.InfoWindow({
+							map: map,
+							position: geolocate,
+							content:
+								'<b>UNP - Nascimento de Castro</b><br>'+
+								'<button>Solicitar Uber</button>'
+						});
+						map.setCenter(geolocate);
+					});
+				} else {
+					document.getElementById('google_canvas').innerHTML = 'No Geolocation Support.';
+				}
+			})();
+		</script>
+    </body>
+</html>
