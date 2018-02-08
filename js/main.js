@@ -5,8 +5,8 @@ if(!!navigator.geolocation) {
 }
 
 function solicitarUber(id){
-	$.getJSON("webservice/requisicao.php?id="+id+"&latlng="+lat+","+lng+"&raio="+raio+"&useragent="+navigator.userAgent, function(data){
-		alert("Uber solicitado, aguarde ("+data+")");
+	$.get("webservice/requisicao.php?id="+id+"&latlng="+lat+","+lng+"&raio="+raio+"&useragent="+navigator.userAgent, function(data){
+		alert("Uber solicitado, aguarde");
 	});
 	
 }
