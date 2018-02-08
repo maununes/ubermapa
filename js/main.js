@@ -4,7 +4,7 @@ if(!!navigator.geolocation) {
     alert('Seu navegador não suporta Geolocalização')
 }
 
-function solicitarUber(id,lat,lng){
+function solicitarUber(id){
 	$.getJSON("webservice/requisicao.php?id="+id+"&latlng="+lat+","+lng+"&raio="+raio+"&useragent="+navigator.userAgent, function(data){
 		alert("Uber solicitado, aguarde ("+data+")");
 	});
@@ -46,6 +46,10 @@ function gerarMapa(listaInfowindow,raio){
 				}
 			}
 			
+			//variaveis globais
+			lat = position.coords.latitude;
+			lng = position.coords.longitude;
+			//
 			geolocate = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 			infowindow = new google.maps.InfoWindow({
 				map: map,
@@ -61,7 +65,7 @@ function gerarMapa(listaInfowindow,raio){
 function getcontent(universidade){
 	return '<b>'+universidade.nome+'</b>'+
 			'<br>'+universidade.descricao+
-			'<br><button onclick="solicitarUber('+universidade.universidadeid+','+universidade.lat+','+universidade.lng+')">Solicitar Uber</button>';
+			'<br><button onclick="solicitarUber('+universidade.universidadeid+')">Solicitar Uber</button>';
 
 }
 
