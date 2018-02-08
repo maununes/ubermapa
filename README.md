@@ -7,12 +7,12 @@ Ao clicar em uma das universidades apresentadas, a aplicação armazena as infor
 
 ## Tecnologias Utilizadas
 
--HTML5
--Javascript
--Jquery
--Api do Google Maps
--Mysql
--PHP
+1) HTML5
+2) Javascript
+3) Jquery
+4) Api do Google Maps
+5) Mysql
+6) PHP
 
 ## Instruções para Deploy
 
